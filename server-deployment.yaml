@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: server
+  name: server
+spec:
+  replicas: 1
+  strategy: {}
+  selector:
+    matchLabels:
+        io.kompose.service: server
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: server
+    spec:
+      containers:
+      - image: flaskserver_server
+        imagePullPolicy: Never
+        name: server
+        ports:
+        - containerPort: 5000
+        resources: {}
+      restartPolicy: Always
+status: {}

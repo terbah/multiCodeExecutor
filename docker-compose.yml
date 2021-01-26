@@ -1,0 +1,38 @@
+version: '3' 
+services:
+    rabbitmq:
+        image: 'rabbitmq'
+        hostname: rabbit
+        #networks:
+         #   - monreseau
+        restart: always
+        #depends_on: 
+         #   - redis
+    server: 
+        build: ./server
+        restart: always
+        #networks:
+         #   - monreseau
+        ports:
+            - "5000:5000"
+        #depends_on:
+         #   - "rabbitmq"
+    redis:
+        image: 'redis:alpine'
+        restart: always
+        #networks:
+         #   - monreseau
+    worker:
+        build: ./workers
+        restart: always
+        #pids_limit: 60   # Max number of processes running in thw container.
+        #cpus: 2          # No of CPUs allocated 
+        #mem_limit: 150M  # Hard limit
+        #depends_on:
+         #   - "server"
+  #      networks:
+   #         - monreseau
+
+#networks:
+ #   monreseau:
+
